@@ -1,0 +1,39 @@
+version: '3'
+services:
+  app:
+    image: pycon-law-rag-backend:85035d7
+    container_name: pycon-law-rag-backend
+    environment:
+      - WORKERS=1
+      - GPU_ID=1,2
+      # - TYPE_HOST=typesense
+      # - TYPE_API_KEY=tomandjerry
+      # - MEILI_HOST=meilisearch
+      # - MEILI_API_KEY=V5ZEsSGoRYeb2GwLMYb8q1XbfRdY7vCaw1DwTB9enWg
+    #    volumes:
+    #      - /NLP/Z00051780/pretrained:/models
+    ports:
+      - 15012:15012
+
+      # - 15009:15009
+    volumes:
+      - $PWD:/app
+  # typesense:
+  #   image: typesense/typesense:0.25.1
+  #   container_name: typesense
+  #   volumes:
+  #     - ./typesense-data:/data
+  #   ports:
+  #     - 8108:8108
+  #   command: '--data-dir /data --api-key=tomandjerry'
+
+  # meilisearch:
+  #   image: getmeili/meilisearch:v1.4
+  #   container_name: meilisearch
+  #   environment:
+  #     - MEILI_MASTER_KEY=V5ZEsSGoRYeb2GwLMYb8q1XbfRdY7vCaw1DwTB9enWg
+  #   ports:
+  #     - 7700:7700
+# docker run -it pycon-law-rag-backend:85035d7-20240307-1557 /bin/bash
+
+  # docker logs -f pycon-law-rag-backend

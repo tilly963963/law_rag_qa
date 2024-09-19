@@ -1,0 +1,32 @@
+version: '3'
+services:
+  app:
+    image: pycon-law-rag-backend:85035d7-20240307-1557
+    container_name: pycon-law-rag-backend
+    environment:
+      - WORKERS=1
+      - GPU_ID=1,2
+      
+      # - TYPE_HOST=typesense
+      # - TYPE_API_KEY=tomandjerry
+      # - MEILI_HOST=meilisearch
+      # - MEILI_API_KEY=V5ZEsSGoRYeb2GwLMYb8q1XbfRdY7vCaw1DwTB9enWg
+    #    volumes:
+    #      - /NLP/Z00051780/pretrained:/models
+    ports:
+      - 15009:15009
+    volumes:
+      - $PWD:/backend
+
+
+  ui:
+    image: pycon-law-rag-frontend:${IMAGE_TAG}
+    container_name: pycon-law-rag-frontend
+    environment:
+      - BACKEND_URL = http://pycon-law-rag-backend:15009
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
+
+    ports:
+      - 15021:8501

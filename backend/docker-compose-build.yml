@@ -1,0 +1,7 @@
+version: '3'
+services:
+  app:
+    image: pycon-law-rag-backend:${IMAGE_TAG}
+    build:
+      context: ./
+      dockerfile: ./docker/Dockerfile
